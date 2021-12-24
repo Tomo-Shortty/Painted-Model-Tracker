@@ -77,6 +77,14 @@ namespace PaintedModelTracker
             RemoveModelButton.Visibility = Visibility.Visible;
         }
 
+        private void UpdateTotalStatistics()
+        {
+            TotalModelQuantityLabel.Content = ModelList.TotalModelQuantity;
+            TotalModelPaintedLabel.Content = ModelList.TotalPaintedModelQuantity;
+            TotalModelNotPaintedLabel.Content = ModelList.TotalNotPainted;
+            TotalPercentagePaintedLabel.Content = ModelList.TotalPercentagePainted;
+        }
+
         private void ClearModelText()
         {
             ModelNameTextBox.Text = "";
@@ -99,6 +107,7 @@ namespace PaintedModelTracker
                 };
                 ModelListBox.Items.Add(item);
 
+                UpdateTotalStatistics();
                 ClearModelText();
             }
             catch (Exception ex)
@@ -114,13 +123,14 @@ namespace PaintedModelTracker
 
         private void EditModelButton_Click(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
         private void RemoveModelButton_Click(object sender, RoutedEventArgs e)
         {
             ModelList.RemoveModel(ModelListBox.SelectedIndex);
             ModelListBox.Items.RemoveAt(ModelListBox.SelectedIndex);
+            UpdateTotalStatistics();
         }
 
         private void ClearListButton_Click(object sender, RoutedEventArgs e)
@@ -129,6 +139,10 @@ namespace PaintedModelTracker
             ModelList.ClearList();
             HideModelStatistics();
             ClearModelText();
+            TotalModelQuantityLabel.Content = "";
+            TotalModelPaintedLabel.Content = "";
+            TotalModelNotPaintedLabel.Content = "";
+            TotalPercentagePaintedLabel.Content = "";
         }
 
         private void ModelListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
