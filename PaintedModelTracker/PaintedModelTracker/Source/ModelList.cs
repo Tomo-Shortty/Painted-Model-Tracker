@@ -14,7 +14,7 @@ namespace PaintedModelTracker.Source
         private int _totalModelQuantity;
         private int _totalPaintedModelQuantity;
         private int _totalNotPainted;
-        private decimal _percentagePainted;
+        private decimal _totalPercentagePainted;
 
         public ModelList(int id, string name)
         {
@@ -29,7 +29,7 @@ namespace PaintedModelTracker.Source
         public int TotalModelQuantity => _totalModelQuantity;
         public int TotalPaintedModelQuantity => _totalPaintedModelQuantity;
         public int TotalNotPainted => _totalNotPainted;
-        public decimal PercentagePainted => _percentagePainted;
+        public decimal TotalPercentagePainted => _totalPercentagePainted;
 
         public void AddModel(Model newModel)
         {
@@ -49,7 +49,7 @@ namespace PaintedModelTracker.Source
             _totalModelQuantity = 0;
             _totalPaintedModelQuantity = 0;
             _totalNotPainted = 0;
-            _percentagePainted = 0;
+            _totalPercentagePainted = 0;
         }
 
         private void UpdateTotals()
@@ -57,10 +57,10 @@ namespace PaintedModelTracker.Source
             foreach (var model in Models)
             {
                 _totalModelQuantity += model.TotalQuantity;
-                _totalPaintedModelQuantity += model.PaintedQuantity;
+                _totalPaintedModelQuantity += model.Painted;
             }
             _totalNotPainted = _totalModelQuantity - _totalPaintedModelQuantity;
-            _percentagePainted = (_totalPaintedModelQuantity / _totalModelQuantity) * 100;
+            _totalPercentagePainted = Math.Round(Convert.ToDecimal((_totalPaintedModelQuantity / _totalModelQuantity) * 100), 2);
         }
     }
 }
