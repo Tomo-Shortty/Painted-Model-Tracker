@@ -8,23 +8,17 @@ namespace PaintedModelTracker.Source
 {
     internal class ModelList
     {
-        private int _id;
-        private string _name;
         private List<Model> _models;
         private int _totalModelQuantity;
         private int _totalPaintedModelQuantity;
         private int _totalNotPainted;
         private decimal _totalPercentagePainted;
 
-        public ModelList(int id, string name)
+        public ModelList()
         {
-            _id = id;
-            _name = name;
             _models = new List<Model>();
         }
 
-        public int Id => _id;
-        public string Name => _name;
         public List<Model> Models => _models;
         public int TotalModelQuantity => _totalModelQuantity;
         public int TotalPaintedModelQuantity => _totalPaintedModelQuantity;
@@ -37,9 +31,9 @@ namespace PaintedModelTracker.Source
             UpdateTotals();
         }
 
-        public void RemoveModel(Model selectedModel)
+        public void RemoveModel(int index)
         {
-            Models.Remove(selectedModel);
+            Models.RemoveAt(index);
             UpdateTotals();
         }
 
@@ -56,7 +50,7 @@ namespace PaintedModelTracker.Source
         {
             foreach (var model in Models)
             {
-                _totalModelQuantity += model.TotalQuantity;
+                _totalModelQuantity += model.Quantity;
                 _totalPaintedModelQuantity += model.Painted;
             }
             _totalNotPainted = _totalModelQuantity - _totalPaintedModelQuantity;

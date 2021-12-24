@@ -38,7 +38,7 @@ namespace PaintedModelTracker.Source
 
         public int Id => _id;
         public string Name => _name;
-        public int TotalQuantity => _quantity;
+        public int Quantity => _quantity;
         public int Painted => _painted;
         public int NotPainted => _notPainted;
         public decimal PercentagePainted => _percentagePainted;
